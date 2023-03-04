@@ -21,6 +21,7 @@ export default function App() {
         // handle success
         const data = response.data;
         setConditonCode(data.weather[0].id);
+        console.log(conditionCode > 5);
         setErrMsg(false);
         setShowCondition(true);
         setCity(name);
@@ -50,8 +51,6 @@ export default function App() {
     imageUrl = `https://cdn.pixabay.com/photo/2019/08/19/07/45/corgi-4415649_960_720.jpg`;
   } else if (conditionCode === 721 || conditionCode === 741) {
     imageUrl = `https://wallpapercave.com/wp/wp11383754.jpg`;
-  } else {
-    imageUrl = "https://images.pexels.com/photos/159020/sunset-sky-afterglow-evening-sky-159020.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
   }
   return (
     <ImageBackground resizeMode="cover" style={{ flex: 1, flexDirection: "column", justifyContent: "center", alignItems: "center" }} source={{ uri: imageUrl }}>
