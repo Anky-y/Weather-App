@@ -21,7 +21,7 @@ export default function App() {
         // handle success
         const data = response.data;
         setConditonCode(data.weather[0].id);
-        console.log(conditionCode > 5);
+        console.log(conditionCode);
         setErrMsg(false);
         setShowCondition(true);
         setCity(name);
@@ -36,39 +36,43 @@ export default function App() {
       });
   };
 
-  const image1 = "https://img.freepik.com/free-photo/weather-effects-composition_23-2149853295.jpg?w=1380&t=st=1677953183~exp=1677953783~hmac=363522694a133c9e162598953798f5950cbffcc6dd27f62d416a28ab8f62ffc5";
+  const image1 = require(`./images/rain.jpg`);
 
-  const image2 = `https://images.unsplash.com/photo-1532178910-7815d6919875?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=435&q=80`;
+  const image2 = require(`./images/cloudy.jpg`);
 
-  const image3 = `https://images.unsplash.com/photo-1518467946652-b194dd6dd321?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80`;
+  const image3 = require(`./images/snow.jpg`);
 
-  const image4 = `https://wallpapercave.com/wp/wp8973745.jpg`;
+  const image4 = require(`./images/clear.jpg`);
 
-  const image5 = `https://images.unsplash.com/photo-1551234250-d88208c2ce14?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MTB8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60`;
+  const image5 = require(`./images/thunder.jpg`);
 
-  const image6 = `https://cdn.pixabay.com/photo/2019/08/19/07/45/corgi-4415649_960_720.jpg`;
+  const image6 = require(`./images/drizzle.jpg`);
 
-  let imageUrl = `https://images.pexels.com/photos/159020/sunset-sky-afterglow-evening-sky-159020.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1`;
+  const image7 = require(`./images/haze.jpg`);
+
+  let image = require(`./images/default.jpg`);
   if (conditionCode > 499 && conditionCode < 532) {
-    imageUrl = image1;
+    image = image1;
   } else if (conditionCode > 800 && conditionCode < 805) {
-    imageUrl = image2;
+    image = image2;
   } else if (conditionCode > 599 && conditionCode < 623) {
-    imageUrl = image3;
+    image = image3;
   } else if (conditionCode === 800) {
-    imageUrl = image4;
+    image = image4;
   } else if (conditionCode > 199 && conditionCode < 233) {
-    imageUrl = image5;
+    image = image5;
   } else if (conditionCode > 299 && conditionCode < 322) {
-    imageUrl = image6;
+    image = image6;
+  } else if (conditionCode === 721 || conditionCode === 741 || conditionCode === 711) {
+    image = image7;
   }
   return (
-    <ImageBackground resizeMode="cover" style={{ flex: 1, flexDirection: "column", justifyContent: "center", alignItems: "center" }} source={{ uri: imageUrl }}>
+    <ImageBackground resizeMode="cover" style={{ flex: 1, flexDirection: "column", justifyContent: "center", alignItems: "center" }} source={image}>
       <NativeBaseProvider>
         <Box style={styles.container}>
           {showCondition && <Condition temp={temp} city={city} condition={condition} styles={styles} iconCode={iconCode} />}
           {errMsg && (
-            <Text color="red.400" fontSize="2xl">
+            <Text color="red.400" fontSize="3xl" bold>
               City couldn't be found!
             </Text>
           )}
